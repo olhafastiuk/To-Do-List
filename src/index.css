@@ -16,3 +16,11 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
+
+.done {
+  text-decoration: line-through;
+}
+.done-span::after {
+  content: " ✔";
+  margin-left: 20px;
+}
