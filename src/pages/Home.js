@@ -24,7 +24,13 @@ function Home() {
   const addNewTask = () => {
     handleClose();
     formType === "create"
-      ? dispatch(addTask(publication.length + 1))
+      ? dispatch(
+          addTask(
+            publication.length !== 0
+              ? publication[publication.length - 1].id + 1
+              : 1
+          )
+        )
       : dispatch(editTask(idTask));
   };
 

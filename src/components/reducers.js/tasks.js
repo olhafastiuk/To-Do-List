@@ -3,7 +3,7 @@ const base = [
     id: 1,
     title: `Note 1`,
     description: "",
-    date: `25 Jan 2015`,
+    date: "25 Jan 2015",
     time: "12:20:23",
     completed: false,
   },
@@ -11,7 +11,7 @@ const base = [
     id: 2,
     title: `Note 2`,
     description: "description",
-    date: `25 Jan 2015`,
+    date: "25 Jan 2015",
     time: "12:20:23",
     completed: false,
   },
@@ -19,7 +19,7 @@ const base = [
     id: 3,
     title: `Note 3`,
     description: "",
-    date: `25 Jan 2015`,
+    date: "25 Jan 2015",
     time: "12:20:23",
     completed: false,
   },
@@ -96,7 +96,7 @@ export const tasks = (state = base, action) => {
                 el.title = newTask.title;
               } else {
                 el.title = newTask.title;
-                el.time = `${day} ${monthArr[month]} ${year}`;
+                el.date = `${day} ${monthArr[month]} ${year}`;
                 el.time = `${hours}:${min}:${sec}`;
                 el.completed = false;
               }
@@ -108,7 +108,7 @@ export const tasks = (state = base, action) => {
                 el.description = newTask.description;
               } else {
                 el.description = newTask.description;
-                el.time = `${day} ${monthArr[month]} ${year}`;
+                el.date = `${day} ${monthArr[month]} ${year}`;
                 el.time = `${hours}:${min}:${sec}`;
                 el.completed = false;
               }

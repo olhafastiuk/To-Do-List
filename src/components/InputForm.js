@@ -6,6 +6,7 @@ import { addTitle } from "./actions/addTitle";
 
 export default function InputForm({ type, idTask }) {
   const publication = useSelector((state) => state.tasks);
+  const editTask = publication.find((el) => el.id === idTask);
 
   const dispatch = useDispatch();
 
@@ -41,7 +42,7 @@ export default function InputForm({ type, idTask }) {
               className="shadow-none"
               type="text"
               placeholder="To do ..."
-              defaultValue={publication[idTask - 1].title}
+              defaultValue={editTask.title}
               onChange={(e) => dispatch(addTitle(e.target.value))}
             />
           </Form.Group>
@@ -50,7 +51,7 @@ export default function InputForm({ type, idTask }) {
               className="shadow-none"
               type="text"
               placeholder="Description"
-              defaultValue={publication[idTask - 1].description}
+              defaultValue={editTask.description}
               onChange={(e) => dispatch(addDescription(e.target.value))}
             />
           </Form.Group>
