@@ -15,6 +15,7 @@ export default function InputForm({ type, idTask }) {
         <Form>
           <Form.Group className="mb-3">
             <Form.Control
+              className="shadow-none"
               type="text"
               placeholder="To do ..."
               onChange={(e) => {
@@ -24,6 +25,7 @@ export default function InputForm({ type, idTask }) {
           </Form.Group>
           <Form.Group className="mb-3">
             <Form.Control
+              className="shadow-none"
               type="text"
               placeholder="Description"
               onChange={(e) => {
@@ -36,6 +38,7 @@ export default function InputForm({ type, idTask }) {
         <Form>
           <Form.Group className="mb-3">
             <Form.Control
+              className="shadow-none"
               type="text"
               placeholder="To do ..."
               defaultValue={publication[idTask - 1].title}
@@ -44,6 +47,7 @@ export default function InputForm({ type, idTask }) {
           </Form.Group>
           <Form.Group className="mb-3">
             <Form.Control
+              className="shadow-none"
               type="text"
               placeholder="Description"
               defaultValue={publication[idTask - 1].description}

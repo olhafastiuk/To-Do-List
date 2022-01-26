@@ -31,30 +31,30 @@ const newTask = {
 };
 
 export const tasks = (state = base, action) => {
+  const n = new Date();
+  const month = n.getMonth();
+  const year = n.getFullYear();
+  const hours = n.getHours();
+  const min = n.getMinutes();
+  const sec = n.getSeconds();
+
+  const monthArr = [
+    "Jan",
+    "Feb",
+    "Mar",
+    "Apr",
+    "May",
+    "Jun",
+    "Jul",
+    "Aug",
+    "Sep",
+    "Oct",
+    "Nov",
+    "Dec",
+  ];
+  const day = n.getDate();
   switch (action.type) {
     case "addTask":
-      const n = new Date();
-      const month = n.getMonth();
-      const year = n.getFullYear();
-      const hours = n.getHours();
-      const min = n.getMinutes();
-      const sec = n.getSeconds();
-
-      const monthArr = [
-        "Jan",
-        "Feb",
-        "Mar",
-        "Apr",
-        "May",
-        "Jun",
-        "Jul",
-        "Aug",
-        "Sep",
-        "Oct",
-        "Nov",
-        "Dec",
-      ];
-      const day = n.getDate();
       const task = Object.create(newTask);
       task.id = action.id;
       newTask.title === undefined

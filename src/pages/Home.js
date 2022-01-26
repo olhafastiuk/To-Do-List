@@ -35,24 +35,34 @@ function Home() {
   };
 
   return (
-    <Flex justify="center" direction="column" align="center">
+    <Flex margin="50px 0 0 0" direction="column" align="center">
       {publication.length ? (
-        <ListGroup
-          style={{ display: "flex", flexDirection: "column-reverse" }}
-          variant="flush"
-          style={{ width: "60vw" }}
+        <Flex
+          className="mobile-task"
+          justify="center"
+          direction="column"
+          align="center"
         >
-          {publication.map((el, i) => (
-            <Task task={el} edit={edit} key={i} />
-          ))}
-        </ListGroup>
+          <ListGroup
+            style={{
+              width: "100%",
+              display: "flex",
+              flexDirection: "column-reverse",
+            }}
+            variant="flush"
+          >
+            {publication.map((el, i) => (
+              <Task task={el} edit={edit} key={i} />
+            ))}
+          </ListGroup>
+        </Flex>
       ) : (
         <p>You don`t have task</p>
       )}
 
       <Button
         style={{ marginTop: "50px" }}
-        variant="primary"
+        variant="danger"
         onClick={handleShowCreate}
       >
         Add new
@@ -67,10 +77,10 @@ function Home() {
           <InputForm type={formType} idTask={idTask} />
         </Modal.Body>
         <Modal.Footer>
-          <Button variant="secondary" onClick={handleClose}>
+          <Button variant="light" onClick={handleClose}>
             Cancel
           </Button>
-          <Button variant="primary" onClick={addNewTask}>
+          <Button variant="danger" onClick={addNewTask}>
             Save Changes
           </Button>
         </Modal.Footer>

@@ -17,10 +17,53 @@ code {
     monospace;
 }
 
+.form-control:focus {
+  border-color: #ff5a60 !important;
+}
+
+.btn-close:focus {
+  box-shadow: none !important;
+}
+.btn:focus {
+  box-shadow: none !important;
+}
+
+.not-done {
+  background: #ffffff !important;
+  height: 110px;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 0px 1000px -40px,
+    rgba(0, 0, 0, 0.3) 0px 10px 20px -30px;
+  margin-bottom: 10px;
+  border-bottom: 1px solid #eeeeee !important;
+}
+
+.done-task {
+  height: 110px;
+  background: #f1eeee !important;
+
+  border-bottom: 1px solid #ffffff !important;
+}
+
 .done {
   text-decoration: line-through;
 }
-.done-span::after {
-  content: " ✔";
-  margin-left: 20px;
+
+.task-not-done::before {
+  content: url(./components/images/checkbox.svg);
+  margin-right: 10px;
+}
+
+.task-done::before {
+  content: url(./components/images/checkbox-done.svg);
+  margin-right: 10px;
+}
+
+.mobile-task {
+  width: 60vw !important;
+}
+
+@media (max-width: 500px) {
+  .mobile-task {
+    width: 95vw !important;
+  }
 }
