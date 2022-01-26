@@ -29,7 +29,7 @@ export function NavBar() {
                 />
               </svg>
 
-              <h1 class="p-0 m-0 fw-bold">To Do List</h1>
+              <h1 class="p-0 m-0 fw-bold">To-Do List</h1>
             </Flex>
           </Navbar.Brand>
         </LinkContainer>

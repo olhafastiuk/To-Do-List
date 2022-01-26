@@ -63,7 +63,7 @@ function Home() {
           </ListGroup>
         </Flex>
       ) : (
-        <p>You don`t have task</p>
+        <h2 style={{margin:"50px 0"}} className=" fst-italic fw-lighter">You don`t have any task!</h2>
       )}
 
       <Button
