@@ -5,20 +5,33 @@ import InputForm from "../components/InputForm";
 import { Flex } from "../components/CommonStyles";
 import { useDispatch, useSelector } from "react-redux";
 import { addTask } from "../components/actions/addTask";
+import { editTask } from "../components/actions/editTask";
 
 function Home() {
   const publication = useSelector((state) => state);
   const dispatch = useDispatch();
 
   const [show, setShow] = useState(false);
-  const [useForm, setUseForm] = useState(true);
+  const [formType, setFormType] = useState("");
+  const [idTask, setIdTask] = useState();
 
   const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
+  const handleShowCreate = () => {
+    setFormType("create");
+    setShow(true);
+  };
 
   const addNewTask = () => {
     handleClose();
-    dispatch(addTask(publication.length + 1));
+    formType === "create"
+      ? dispatch(addTask(publication.length + 1))
+      : dispatch(editTask(idTask));
+  };
+
+  const edit = (id) => {
+    setIdTask(id);
+    setFormType("edit");
+    setShow(true);
   };
 
   return (
@@ -30,7 +43,7 @@ function Home() {
           style={{ width: "60vw" }}
         >
           {publication.map((el, i) => (
-            <Task task={el} key={i} />
+            <Task task={el} edit={edit} key={i} />
           ))}
         </ListGroup>
       ) : (
@@ -40,16 +53,18 @@ function Home() {
       <Button
         style={{ marginTop: "50px" }}
         variant="primary"
-        onClick={handleShow}
+        onClick={handleShowCreate}
       >
         Add new
       </Button>
       <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton>
-          <Modal.Title>Create New Task</Modal.Title>
+          <Modal.Title>
+            {formType === "create" ? `Create New Task` : `Edit You Task`}
+          </Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <InputForm form={useForm} />
+          <InputForm type={formType} idTask={idTask} />
         </Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={handleClose}>

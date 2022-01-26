@@ -5,7 +5,7 @@ import { deleteTask } from "./actions/deleteTask";
 import { doneTask } from "./actions/doneTask";
 import { Flex } from "./CommonStyles";
 
-export const Task = ({ task }) => {
+export const Task = ({ task, edit }) => {
   const dispatch = useDispatch();
 
   const done = [];
@@ -37,10 +37,7 @@ export const Task = ({ task }) => {
             </Flex>
           </Flex>
           <Flex width="30%" align="center" justify="flex-end">
-            <Button
-              // onClick={() => edit()}
-              variant="light"
-            >
+            <Button onClick={() => edit(task.id)} variant="light">
               ред.
             </Button>
             <CloseButton onClick={() => dispatch(deleteTask(task.id))} />

@@ -41,8 +41,8 @@ const monthArr = [
 ];
 const day = n.getDate();
 const newTask = {
-  title: "",
-  description: "",
+  title: undefined,
+  description: undefined,
   completed: false,
 };
 
@@ -51,7 +51,9 @@ const tasks = (state = base, action) => {
     case "addTask":
       const task = Object.create(newTask);
       task.title = newTask.title;
+      newTask.title = undefined;
       task.description = newTask.description;
+      newTask.description = undefined;
       task.id = action.id;
       task.time = `${day} ${monthArr[month]} ${year}`;
 
@@ -76,7 +78,23 @@ const tasks = (state = base, action) => {
     case "edit":
       {
       }
-      return;
+      return state.forEach(function (el) {
+        if (el.id === action.id) {
+          if (newTask.title != undefined) {
+            el.title = newTask.title;
+            el.time = `${day} ${monthArr[month]} ${year}`;
+
+            newTask.title = undefined;
+          }
+          if (newTask.description != undefined) {
+            el.description = newTask.description;
+            el.time = `${day} ${monthArr[month]} ${year}`;
+
+            newTask.description = undefined;
+          }
+        }
+      });
+
     default:
       return state;
   }
