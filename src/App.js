@@ -7,10 +7,28 @@ import { Provider } from "react-redux";
 import { createStore } from "redux";
 import tasks from "./components/reducers.js/tasks";
 
-const store = createStore(
-  tasks,
-  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
-);
+function saveToLocalStorage(state) {
+  try {
+    const serialisedState = JSON.stringify(state);
+    localStorage.setItem("tasks", serialisedState);
+  } catch (e) {
+    console.warn(e);
+  }
+}
+
+function loadFromLocalStorage() {
+  try {
+    const serialisedState = localStorage.getItem("tasks");
+    if (serialisedState === null) return undefined;
+    return JSON.parse(serialisedState);
+  } catch (e) {
+    console.warn(e);
+    return undefined;
+  }
+}
+
+const store = createStore(tasks, loadFromLocalStorage());
+store.subscribe(() => saveToLocalStorage(store.getState()));
 
 function App() {
   return (

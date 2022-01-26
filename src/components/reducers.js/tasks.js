@@ -52,7 +52,7 @@ const newTask = {
   description: undefined,
 };
 
-const tasks = (state = base, action) => {
+export const tasks = (state = base, action) => {
   switch (action.type) {
     case "addTask":
       const task = Object.create(newTask);
