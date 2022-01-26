@@ -3,21 +3,24 @@ const base = [
     id: 1,
     title: `Note 1`,
     description: "",
-    time: `25 Jan 2015`,
+    date: `25 Jan 2015`,
+    time: "12:20:23",
     completed: false,
   },
   {
     id: 2,
     title: `Note 2`,
-    description: "jsavc",
-    time: `25 Jan 2015`,
+    description: "description",
+    date: `25 Jan 2015`,
+    time: "12:20:23",
     completed: false,
   },
   {
     id: 3,
     title: `Note 3`,
     description: "",
-    time: `25 Jan 2015`,
+    date: `25 Jan 2015`,
+    time: "12:20:23",
     completed: false,
   },
 ];
@@ -25,6 +28,10 @@ const base = [
 const n = new Date();
 const month = n.getMonth();
 const year = n.getFullYear();
+const hours = n.getHours();
+const min = n.getMinutes();
+const sec = n.getSeconds();
+
 const monthArr = [
   "Jan",
   "Feb",
@@ -43,19 +50,24 @@ const day = n.getDate();
 const newTask = {
   title: undefined,
   description: undefined,
-  completed: false,
 };
 
 const tasks = (state = base, action) => {
   switch (action.type) {
     case "addTask":
       const task = Object.create(newTask);
-      task.title = newTask.title;
-      newTask.title = undefined;
-      task.description = newTask.description;
-      newTask.description = undefined;
       task.id = action.id;
-      task.time = `${day} ${monthArr[month]} ${year}`;
+      newTask.title === undefined
+        ? (task.title = "")
+        : (task.title = newTask.title);
+      newTask.title = undefined;
+      newTask.description === undefined
+        ? (task.description = "")
+        : (task.description = newTask.description);
+      newTask.description = undefined;
+      task.date = `${day} ${monthArr[month]} ${year}`;
+      task.time = `${hours}:${min}:${sec}`;
+      task.completed = false;
 
       return [...state, task];
     case "done":
@@ -77,23 +89,36 @@ const tasks = (state = base, action) => {
 
     case "edit":
       {
+        state = state.map(function (el) {
+          if (el.id === action.id) {
+            if (newTask.title != undefined) {
+              if (el.title === newTask.title) {
+                el.title = newTask.title;
+              } else {
+                el.title = newTask.title;
+                el.time = `${day} ${monthArr[month]} ${year}`;
+                el.time = `${hours}:${min}:${sec}`;
+                el.completed = false;
+              }
+
+              newTask.title = undefined;
+            }
+            if (newTask.description != undefined) {
+              if (el.description === newTask.description) {
+                el.description = newTask.description;
+              } else {
+                el.description = newTask.description;
+                el.time = `${day} ${monthArr[month]} ${year}`;
+                el.time = `${hours}:${min}:${sec}`;
+                el.completed = false;
+              }
+              newTask.description = undefined;
+            }
+          }
+          return el;
+        });
       }
-      return state.forEach(function (el) {
-        if (el.id === action.id) {
-          if (newTask.title != undefined) {
-            el.title = newTask.title;
-            el.time = `${day} ${monthArr[month]} ${year}`;
-
-            newTask.title = undefined;
-          }
-          if (newTask.description != undefined) {
-            el.description = newTask.description;
-            el.time = `${day} ${monthArr[month]} ${year}`;
-
-            newTask.description = undefined;
-          }
-        }
-      });
+      return state;
 
     default:
       return state;
