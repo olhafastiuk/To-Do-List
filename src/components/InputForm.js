@@ -5,7 +5,7 @@ import { addDescription } from "./actions/addDescription";
 import { addTitle } from "./actions/addTitle";
 
 export default function InputForm({ type, idTask }) {
-  const publication = useSelector((state) => state);
+  const publication = useSelector((state) => state.tasks);
 
   const dispatch = useDispatch();
 

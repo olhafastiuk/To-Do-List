@@ -8,7 +8,7 @@ import { addTask } from "../components/actions/addTask";
 import { editTask } from "../components/actions/editTask";
 
 function Home() {
-  const publication = useSelector((state) => state);
+  const publication = useSelector((state) => state.tasks);
   const dispatch = useDispatch();
 
   const [show, setShow] = useState(false);

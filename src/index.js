@@ -7,6 +7,8 @@ import reportWebVitals from "./reportWebVitals";
 import { Provider } from "react-redux";
 import { createStore } from "redux";
 import tasks from "./components/reducers.js/tasks";
+import name from "./components/reducers.js/name";
+import { combineReducers } from "redux";
 import { HashRouter } from "react-router-dom";
 
 function saveToLocalStorage(state) {
@@ -28,8 +30,13 @@ function loadFromLocalStorage() {
     return undefined;
   }
 }
+const rootReducers = combineReducers({ tasks, name });
 
-const store = createStore(tasks, loadFromLocalStorage());
+const store = createStore(
+  rootReducers,
+  loadFromLocalStorage(),
+  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+);
 store.subscribe(() => saveToLocalStorage(store.getState()));
 
 ReactDOM.render(
